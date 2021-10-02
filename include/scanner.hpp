@@ -44,14 +44,6 @@ namespace scanner
         static vector<int> splitData(string data, string separator = ",");
     };
 
-    Scanner::Scanner(/* args */)
-    {
-    }
-
-    Scanner::~Scanner()
-    {
-    }
-
     string Scanner::scanData(string name)
     {
         string data;
