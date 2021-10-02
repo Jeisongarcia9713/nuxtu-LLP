@@ -22,7 +22,7 @@ namespace rsa
     {
         for (char &character : str2encode)
         {
-            long double ch2long = (long double)character;
+            int ch2long = (int)character;
             long double c;
             if (ch2long >= rsa::ASCII_A && ch2long <= rsa::ASCII_Z)
             {
@@ -38,7 +38,7 @@ namespace rsa
                 exit(0);
             }
             c = pow(c, e); 
-            c = (long)c % n;
+            c = std::fmod(c,n);
             encodedData.push_back((long)c);
         }
     }

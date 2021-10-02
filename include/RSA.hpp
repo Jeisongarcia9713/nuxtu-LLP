@@ -24,12 +24,12 @@ namespace rsa
     class Encrypt
     {
     private:
-        long n;
-        long e;
-        vector<long double> encodedData;
+        long  n;
+        long  e;
+        vector<long > encodedData;
     public:
         Encrypt();
-        Encrypt(long n, long e);
+        Encrypt(long  n, long  e);
         ~Encrypt();
 
         void calcEncryption(string str2encode);
