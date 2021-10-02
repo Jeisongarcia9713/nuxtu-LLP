@@ -17,15 +17,12 @@ namespace scanner
     private:
         /* data */
     public:
-        Scanner(/* args */);
-        ~Scanner();
-
         /**
          * @brief this is a function that get the values of the strings from the terminalbesides checks that dont be entered emoty strings
          * @param name name of the data is going to be readed
          * @return the string that has been readed
         */
-        string scanData(string name);
+        static string scanData(string name);
 
         template <typename T>
 
@@ -36,7 +33,7 @@ namespace scanner
          * @param type type of the data is goifunction to convert a line of string with values separated by commas, in a vector of intsng to be readed in case that the value inserted dont belong to the expected type is going to be asked to the user that inserted the value again with correct type
          * @return dataIn a generic variable with the data readed from the terminal
         */
-        T scanData(string name, string type);
+        static T scanData(string name, string type);
 
         /**
          * @brief this is a function to convert a line of string with values separated by an specific character, in a vector of ints
@@ -44,7 +41,7 @@ namespace scanner
          * @param separator character that separate the values
          * @return a vector with the values got in the processing
         */
-        vector<int> splitData(string data, string separator = ",");
+        static vector<int> splitData(string data, string separator = ",");
     };
 
     Scanner::Scanner(/* args */)
