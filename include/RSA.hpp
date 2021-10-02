@@ -77,5 +77,30 @@ namespace rsa
          *  @brief overload the operator << to give the objects of the class the posibbility to display in the terminal the vectorencoded
          * */
         friend ostream& operator<<(ostream& os, const Encrypt& dt);
+
+        /**
+         *  @brief getter of attribute n
+         * */
+        long getN();
+
+        /**
+         *  @brief getter of attribute e
+         * */
+        long getE();
+
+        /**
+         *  @brief getter of attribute encodedData
+         * */
+        vector<long > getEncodedData();
+
+        /**
+         *  @brief setter of attribute n
+         * */
+        void setN(long n);
+
+        /**
+         *  @brief getter of attribute e
+         * */
+        void setE(long e);
     };
 }

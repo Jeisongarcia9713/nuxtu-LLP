@@ -49,16 +49,17 @@ namespace rsa
 
     void Encrypt::calcEncryptionMap(string str2encode)
     {
-        encodedData.clear();
+        encodedData.clear(); 
         for (char &character : str2encode)
         {
-            long double c;
+            long double c; // variable for the encryption related math, long double to reduce the possibility of overflow
             try
             {
                 c = ENCRYPTION_MAP.at(character);
             }
             catch (exception &e)
             {
+                /*Exception out of range indicates that there is no value for the entered key*/
                 cout << "Invalid data is triying to be encrypted" << endl;
                 exit(0);
             }
@@ -85,6 +86,32 @@ namespace rsa
         }
         return os;
     }
+
+    long Encrypt::getN()
+    {
+        return n;
+    }
+
+    long Encrypt::getE()
+    {
+        return e;
+    }
+
+    vector<long> Encrypt::getEncodedData()
+    {
+        return encodedData;
+    }
+
+    void Encrypt::setN(long n)
+    {
+        this->n = n;
+    }
+
+    void Encrypt::setE(long e)
+    {
+        this->e = e;
+    }
+
 }
 
 int main()
@@ -93,13 +120,13 @@ int main()
     long n = Scanner::scanData<long>("n", "long");
     string str2encode = Scanner::scanData("String to encode");
     Encrypt encr(n, e);
-    
+
     encr.calcEncryption(str2encode);
 
     cout << "******************************" << endl;
     cout << "The encrypted data is : ";
     cout << encr;
-    cout << "******************************" << endl <<endl;
+    cout << "******************************" << endl << endl;
 
     encr.calcEncryptionMap(str2encode);
     cout << "******************************" << endl;
