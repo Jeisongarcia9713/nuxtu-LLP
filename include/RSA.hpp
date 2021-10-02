@@ -24,7 +24,7 @@ namespace rsa
     class Encrypt
     {
     private:
-        long  n;
+        long  n; 
         long  e;
         vector<long > encodedData;
     public:
@@ -32,7 +32,16 @@ namespace rsa
         Encrypt(long  n, long  e);
         ~Encrypt();
 
+        /**
+         *  @brief specific method to encrypt the data 
+         *  @param str2encode string to be encrypted
+         *  @return this function has no return but save the values of every character encrypted in the vector encodeData
+         * */
         void calcEncryption(string str2encode);
+
+        /**
+         *  @brief overload the operator << to give the objects of the class the posibbility to display in the terminal the vectorencoded
+         * */
         friend ostream& operator<<(ostream& os, const Encrypt& dt);
     };
 }

@@ -22,15 +22,18 @@ namespace rsa
     {
         for (char &character : str2encode)
         {
-            int ch2long = (int)character;
-            long double c;
+            int ch2long = (int)character; // ascii representation of each character to convert the data to its respective value following the table of the test guidelines.
+
+            long double c; // variable for the encryption related math, long double to reduce the possibility of overflow
+            
+            /*Checking that the data that is being encrypted has a representatión following the requeriments of the test*/
             if (ch2long >= rsa::ASCII_A && ch2long <= rsa::ASCII_Z)
             {
-                c = ch2long - rsa::ASCII_A + 1;
+                c = ch2long - rsa::ASCII_A + 1; // convert the ascci value to its value in the table
             }
             else if (ch2long == rsa::ASCII_SPACE)
             {
-                c = 27;
+                c = 27; //give the specific value to the space character, because is the only character that isn't possible to convert as other characters
             }
             else
             {
@@ -43,24 +46,33 @@ namespace rsa
         }
     }
 
+    /*ostream Output stream objects can write sequences of characters and represent other kinds of data*/
     ostream& operator<<(ostream &os, const Encrypt &Encry)
     {
-        for (long data : Encry.encodedData)
-        {
-            os << data << ",";
+        if(!Encry.encodedData.empty()){
+            for (long data : Encry.encodedData)
+            {
+                os << data << ",";
+            }
+            os << endl;
+        }else{
+            os << "There is no data encoded yet." << endl;
         }
-        os << endl;
         return os;
     }
 }
 
 int main()
 {
-
     long e=Scanner::scanData<long>("e", "long");
     long n=Scanner::scanData<long>("n", "long");
     string str2encode=Scanner::scanData("String to encode");
     Encrypt encr(n,e);
-    encr.calcEncryption(str2encode);
     cout<<encr;
+    encr.calcEncryption(str2encode);
+
+    cout<< "******************************"<<endl;
+    cout<<"The encrypted data is : ";
+    cout<<encr;
+    cout<< "******************************"<<endl;
 }
