@@ -52,7 +52,7 @@ namespace rsa
         encodedData.clear();
         for (char &character : str2encode)
         {
-            long double c; // variable for the encryption related math, long double to reduce the possibility of overflow
+            uint64_t c; // variable for the encryption related math, long double to reduce the possibility of overflow
             try
             {
                 c = ENCRYPTION_MAP.at(character);
@@ -63,8 +63,7 @@ namespace rsa
                 cout << "Invalid data is triying to be encrypted" << endl;
                 exit(0);
             }
-            c = pow(c, e);
-            c = std::fmod(c, n);
+            c=modpow(c,(uint64_t)e,(uint64_t)n);
             encodedData.push_back((long)c);
         }
     }

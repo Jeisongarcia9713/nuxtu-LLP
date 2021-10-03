@@ -24,10 +24,7 @@ namespace rsa{
         for (long &character : str2decode)
         {
             
-            long double c= 0;
-            cout<<"C="<<c<<"n:"<<n<<endl;
-            c = std::fmod(c, (long double)n);
-            cout<<"C="<<c<<"Char="<<character<<endl;
+            long c= modpow(character,d,n);
             /*Checking that the data that was decrypted has a representatión following the requeriments of the test*/
             if (c >= rsa::ENCR_A && c <= rsa::ENCR_Z)
             {
@@ -39,7 +36,7 @@ namespace rsa{
             }
             else
             {
-                cout << "Invalid data is triying to be decrypted" << endl;
+                cout << "Invalid data is triying to be decrypted with value:"<< c << endl;
                 exit(0);
             }
             decryptedData += (char) c;
@@ -51,8 +48,7 @@ namespace rsa{
         decryptedData.clear();
         for (long &character : str2decode)
         {
-            long double c= pow(character, d);
-            c = std::fmod(c, n);
+            long c= modpow(character,d,n);
             try
             {
                 c = DECRYPTION_MAP.at(c);
@@ -61,7 +57,7 @@ namespace rsa{
             catch (exception &e)
             {
                 /*Exception out of range indicates that there is no value for the entered key*/
-                cout << "Invalid data is triying to be decrypted" << endl;
+                cout << "Invalid data is triying to be decrypted with value:"<< c << endl;
                 exit(0);
             }
         }
