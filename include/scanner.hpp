@@ -50,7 +50,7 @@ namespace scanner
         bool error;
         string copyData;
         error = false;
-        int size=0;
+        int size = 0;
         cout << "----------------------------------------" << endl;
         do
         {
@@ -58,14 +58,16 @@ namespace scanner
             getline(std::cin, data);
             copyData = data;
             copyData.erase(remove(copyData.begin(), copyData.end(), ' '), copyData.end());
-            size=copyData.size();
-            if(!size){
-                cout<<"Empty string please enter a value"<<endl;
+            size = copyData.size();
+            if (!size)
+            {
+                cout << "Empty string please enter a value" << endl;
             }
         } while (!size);
 
         cout << "The value data of " << name << " is :" << data << endl;
-        cout << "----------------------------------------" << endl<< endl;
+        cout << "----------------------------------------" << endl
+             << endl;
         return data;
     }
 
@@ -104,10 +106,13 @@ namespace scanner
         do
         {
             position = data.find(separator);
-            long temp = stoi(data.substr(0, position).data());
-            numbers.push_back(temp);
-            data = data.substr(position + 1);
-        } while (position != string::npos);
+            if (data.size() > 0)
+            {
+                long temp = stoi(data.substr(0, position).data());
+                numbers.push_back(temp);
+                data = data.substr(position + 1);
+            }
+        } while (position != string::npos );
         return numbers;
     }
 
