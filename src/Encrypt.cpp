@@ -79,6 +79,10 @@ namespace rsa
             cout<< "n must be greater or equal to 221 "<<endl; //this having in consideration the guideline where P>=13 and Q>=17
             errors++;
         }
+        if(e>n){
+            cout<< "e must be less than n "<<endl; 
+            errors++;
+        }
         if(errors) return false;
         return true;
     }

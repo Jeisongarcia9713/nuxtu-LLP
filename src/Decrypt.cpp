@@ -67,13 +67,14 @@ namespace rsa{
     {
         int errors=0;
         if(d<1){
-            cout<< "d must be positive"<<endl;
+            cout<< "d must greater than 0"<<endl;
             errors++;
         }
         if(n<221){
             cout<< "n must be greater or equal to 221 "<<endl; //this having in consideration the guideline where P>=13 and Q>=17
             errors++;
         }
+        
         if(errors) return false;
         return true;
     }
