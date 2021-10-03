@@ -7,7 +7,7 @@ using namespace rsa;
 
 namespace rsa
 {
-    Encrypt::Encrypt() : n(221), e(5)
+    Encrypt::Encrypt() : n(221), e(5) //default values to test impementation
     {
     }
 
@@ -49,7 +49,7 @@ namespace rsa
 
     void Encrypt::calcEncryptionMap(string str2encode)
     {
-        encodedData.clear(); 
+        encodedData.clear();
         for (char &character : str2encode)
         {
             long double c; // variable for the encryption related math, long double to reduce the possibility of overflow
@@ -68,6 +68,22 @@ namespace rsa
             encodedData.push_back((long)c);
         }
     }
+
+    bool Encrypt::checkE_NData()
+    {
+        int errors=0;
+        if(e<2){
+            cout<< "e must be greater than 1 "<<endl;
+            errors++;
+        }
+        if(n<221){
+            cout<< "n must be greater or equal to 221 "<<endl; //this having in consideration the guideline where P>=13 and Q>=17
+            errors++;
+        }
+        if(errors) return false;
+        return true;
+    }
+
 
     /*ostream Output stream objects can write sequences of characters and represent other kinds of data*/
     ostream &operator<<(ostream &os, const Encrypt &Encry)
@@ -118,19 +134,23 @@ int main()
 {
     long e = Scanner::scanData<long>("e", "long");
     long n = Scanner::scanData<long>("n", "long");
-    string str2encode = Scanner::scanData("String to encode");
     Encrypt encr(n, e);
+    if(!encr.checkE_NData()) exit(0);
 
+    string str2encode = Scanner::scanData("String to encode");
+    
     encr.calcEncryption(str2encode);
-
     cout << "******************************" << endl;
     cout << "The encrypted data is : ";
     cout << encr;
-    cout << "******************************" << endl << endl;
+    cout << "******************************" << endl
+         << endl;
 
     encr.calcEncryptionMap(str2encode);
     cout << "******************************" << endl;
-    cout << "The encrypted data with map representation is : ";
+    cout << "The encrypted data using the map representation is : ";
     cout << encr;
     cout << "******************************" << endl;
+
+    
 }

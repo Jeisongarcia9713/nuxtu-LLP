@@ -12,6 +12,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_executable(Encrypt src/Encrypt.cpp)
 add_executable(Decrypt src/Decrypt.cpp)
 
+
 target_include_directories(Encrypt PUBLIC
                           ./include)
 target_include_directories(Decrypt PUBLIC

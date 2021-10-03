@@ -30,18 +30,18 @@ namespace scanner
          * @brief this is a generic function for reading data from terminal, 
          * this function will be running until be able to get a data from the correct type
          * @param name name of the data is going to be readed is for information to the user
-         * @param type type of the data is goifunction to convert a line of string with values separated by commas, in a vector of intsng to be readed in case that the value inserted dont belong to the expected type is going to be asked to the user that inserted the value again with correct type
+         * @param type type of the data is going to be readed in case that the value inserted dont belong to the expected type is going to be asked to the user that inserted the value again with correct type
          * @return dataIn a generic variable with the data readed from the terminal
         */
         static T scanData(string name, string type);
 
         /**
-         * @brief this is a function to convert a line of string with values separated by an specific character, in a vector of ints
+         * @brief this is a function to convert a line of string with values separated by an specific character, in a vector of longs
          * @param data  data is going to be proccesed
          * @param separator character that separate the values
          * @return a vector with the values got in the processing
         */
-        static vector<int> splitData(string data, string separator = ",");
+        static vector<long> splitData(string data, string separator = ",");
     };
 
     string Scanner::scanData(string name)
@@ -97,14 +97,14 @@ namespace scanner
         return dataIn;
     }
 
-    vector<int> Scanner::splitData(string data, string separator)
+    vector<long> Scanner::splitData(string data, string separator)
     {
-        std::vector<int> numbers;
-        int position;
+        std::vector<long> numbers;
+        long position;
         do
         {
             position = data.find(separator);
-            int temp = stoi(data.substr(0, position).data());
+            long temp = stoi(data.substr(0, position).data());
             numbers.push_back(temp);
             data = data.substr(position + 1);
         } while (position != string::npos);
