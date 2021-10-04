@@ -126,6 +126,12 @@ int main(){
     long d = Scanner::scanData<long>("d", "long");
     long n = Scanner::scanData<long>("n", "long");
     Decrypt decr(n, d);
+    long p =found_first_factor(n);
+    long q =n/p; 
+    cout<<"first factor"<<p<<endl;
+    cout<<"second factor"<<q<<endl;
+    cout<<"first factor is prime"<<is_prime(p)<<endl;
+    cout<<"second factor is prime"<<is_prime(q)<<endl;
     if(!decr.checkD_NData()) exit(0);
 
     bool error=false;

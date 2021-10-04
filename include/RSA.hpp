@@ -91,6 +91,62 @@ namespace rsa
         return result;
     }
 
+    /**
+     * @brief  this function found the first factor of one number
+     * @param  n number to found the factor
+     * @return the first factor of the number
+     * */
+    long found_first_factor(long n)
+    {
+        long i =2;
+        // This will loop from 2 to int(sqrt(x))
+        while (i * i <= n)
+        {
+            // Check if i divides x without leaving a remainder
+            if (n % i == 0)
+            {
+                // This means that n has a factor in between 2 and sqrt(n)
+                // So it is not a prime number
+                return i;
+            }
+            i += 1;
+        }
+        return i;
+    }
+
+    /**
+     * @brief  this function check if one number is prime, the algorith have in consideration that you cand found all the factors of one number searching from 1 to sqrt(n)
+     * @param  n number to check
+     * @param  start from what value start lo look
+     * @return true if number is prime 
+     * */
+    bool is_prime(long n, int start = 2)
+    {
+        // Assumes that n is a positive natural number
+        // We know 1 is not a prime number
+        if (n == 1)
+        {
+            return false;
+        }
+
+        long i = start;
+        // This will loop from start to int(sqrt(x))
+        while (i * i <= n)
+        {
+            // Check if i divides x without leaving a remainder
+            if (n % i == 0)
+            {
+                // This means that n has a factor in between 2 and sqrt(n)
+                // So it is not a prime number
+                return false;
+            }
+            i += 1;
+        }
+        // If we did not find any factor in the above loop,
+        // then n is a prime number
+        return true;
+    }
+
     class Decrypt
     {
     private:

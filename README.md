@@ -14,3 +14,5 @@ Fork this repository as the base for your solution.
  -----------Encrypt.cpp  Source code with the logic for the solution of the task of Encryption RSA
  +CMakeLists.txt  set of directives and instructions describing the project's source files and targets
  ```
+
+ 
