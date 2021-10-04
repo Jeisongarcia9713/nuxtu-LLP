@@ -1,7 +1,6 @@
 #include "RSA.hpp"
 #include "scanner.hpp"
 
-
 using namespace std;
 using namespace scanner;
 using namespace rsa;
@@ -64,30 +63,61 @@ namespace rsa
                 cout << "Invalid data is triying to be encrypted" << endl;
                 exit(0);
             }
-            c=modpow(c,(uint64_t)e,(uint64_t)n);
+            c = modpow(c, (uint64_t)e, (uint64_t)n);
             encodedData.push_back((long)c);
         }
     }
 
     bool Encrypt::checkE_NData()
     {
-        int errors=0;
-        if(e<2){
-            cout<< "e must be greater than 1 "<<endl;
+        int errors = 0;
+        long p;
+        long q;
+        long phi = 0;
+        if (n < 221)
+        {
+            cout << "n must be greater or equal to 221 " << endl; //this having in consideration the guideline where P>=13 and Q>=17
             errors++;
         }
-        if(n<221){
-            cout<< "n must be greater or equal to 221 "<<endl; //this having in consideration the guideline where P>=13 and Q>=17
+        else
+        {
+            p = found_first_factor(n);
+            q = n / p;
+            if (p != q && (!is_prime(p) || !is_prime(q, p)))
+            {
+                cout << "n is no the product of two prime numbers" << endl;
+                errors++;
+            }
+            else
+            {
+                phi = (p - 1) * (q - 1);
+            }
+        }
+        if (e < 2)
+        {
+            cout << "e must be greater than 1 " << endl;
             errors++;
         }
-        if(e>n){
-            cout<< "e must be less than n "<<endl; 
-            errors++;
+        else
+        {
+            if (phi)
+            {
+                if (phi % e == 0)
+                {
+                    cout << "phi is divisible by e" << endl;
+                    errors++;
+                }
+                if (e>=phi){
+                    cout << "e must be less than phi" << endl;
+                    errors++;
+                }
+            }
         }
-        if(errors) return false;
+
+        if (errors)
+            return false;
         return true;
     }
-
 
     /*ostream Output stream objects can write sequences of characters and represent other kinds of data*/
     ostream &operator<<(ostream &os, const Encrypt &Encry)
@@ -139,10 +169,11 @@ int main()
     long e = Scanner::scanData<long>("e", "long");
     long n = Scanner::scanData<long>("n", "long");
     Encrypt encr(n, e);
-    if(!encr.checkE_NData()) exit(0);
+    if (!encr.checkE_NData())
+        exit(0);
 
     string str2encode = Scanner::scanData("String to encode");
-    
+
     encr.calcEncryption(str2encode);
     cout << "******************************" << endl;
     cout << "The encrypted data is : ";
@@ -155,6 +186,4 @@ int main()
     cout << "The encrypted data using the map representation is : ";
     cout << encr;
     cout << "******************************" << endl;
-
-    
 }

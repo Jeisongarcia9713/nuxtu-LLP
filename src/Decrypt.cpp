@@ -141,7 +141,7 @@ int main()
     Decrypt decr(n, d);
     if (!decr.checkD_NData())
         exit(0);
-
+    
     bool error = false;
     vector<long> str2decode;
     do
